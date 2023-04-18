@@ -1,0 +1,50 @@
+/******************************************************************************
+
+Welcome to GDB Online.
+  GDB online is an online compiler and debugger tool for C, C++, Python, PHP, Ruby, 
+  C#, OCaml, VB, Perl, Swift, Prolog, Javascript, Pascal, COBOL, HTML, CSS, JS
+  Code, Compile, Run and Debug online from anywhere in world.
+
+*******************************************************************************/
+#include <stdio.h>
+#include<string.h>
+#include<stdbool.h>
+bool main()
+{
+    char string1[500];
+     char string2[500];
+     int count1[26]={0};
+     int count2[26]={0};
+     int flag=0;
+     printf("Enter 1st string");
+    scanf("%s",string1);
+    printf("Enter 2nd string");
+    scanf("%s",string2);
+    printf("%s",string1);
+   printf("  %s",string2);
+    if(strlen(string1)==strlen(string2))
+    {
+   for(int i=0;i<strlen(string1);i++)
+   {
+       count1[string1[i]-'a']++;
+       count2[string2[i]-'a']++;
+   }
+   for(int i=0;i<26;i++)
+   {
+       
+       if(count1[i]!=count2[i])
+       {
+          flag=1;
+       }
+       
+   }
+   
+    }
+ else
+ flag=1;
+ if(flag==0)
+ printf("Given strings are Anagram");
+ else
+ printf("Given strings are not an Anagram");
+   
+}
