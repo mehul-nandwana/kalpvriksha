@@ -1,0 +1,102 @@
+#include<stdio.h>
+#include<conio.h>
+#include<string.h>
+#include<stdlib.h>
+#include<stdbool.h>
+struct node
+{
+    int key;
+    struct node *left,*right;
+};
+struct node *insert(struct node* root,int key)
+{
+    struct node* newnode=(struct node *)malloc(sizeof(struct node));
+    newnode->key=key;
+    newnode->left=NULL;
+    newnode->right=NULL;
+    if(root==NULL)
+    {
+        return newnode;
+    }
+    else
+    {
+        struct node *start,*prevNode;
+        start=root;
+        while(start!=NULL)
+        {
+            prevNode=start;
+            if(key>start->key)
+            start=start->right;
+            else
+            start=start->left;
+        }
+        if(prevNode->key>key)
+        prevNode->left=newnode;
+        else
+        prevNode->right=newnode;
+    }
+    return root;
+    
+}
+void displayInorder(struct node *root)
+{
+    if(root==NULL)
+   {
+       return;
+   }
+   displayInorder(root->left);
+   printf("%d ", root->key);
+   displayInorder(root->right);
+}
+void displayPreorder(struct node *root)
+{
+    if(root==NULL)
+   {
+       return;
+   }
+   printf("%d ", root->key);
+    displayPreorder(root->left);
+   displayPreorder(root->right);
+}
+void displayPostorder(struct node *root)
+{
+    if(root==NULL)
+   {
+       return;
+   }
+   displayPostorder(root->left);
+   displayPostorder(root->right);
+   printf("%d ", root->key);
+}
+int search(struct node* root,int key)
+{
+    if(root==NULL)
+    return 0;
+    else
+    {
+       
+         if(key>root->key)
+        return search(root->right,key);
+        else if(root->key==key)
+        return 1;
+        return search(root->left,key);
+    }
+}
+int main()
+{
+    int i, val, key;
+    struct node *root = NULL;
+    scanf("%d", &val);
+    for (i = 0; i < val; i++){
+        scanf("%d",&key);
+        root = insert( root,key);
+    }
+    displayInorder(root);
+    displayPostorder(root);
+    displayPreorder(root);
+    bool res=search(root,4);
+    if(res==1)
+    printf("true");
+    else
+    printf("false");
+}
